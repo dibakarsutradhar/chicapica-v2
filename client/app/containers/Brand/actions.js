@@ -4,8 +4,8 @@
  *
  */
 
-import { success } from 'react-notification-system-redux';
-import axios from 'axios';
+import { success } from "react-notification-system-redux";
+import axios from "axios";
 
 import {
   FETCH_BRANDS,
@@ -15,11 +15,11 @@ import {
   ADD_BRAND,
   REMOVE_BRAND,
   BRAND_SELECT,
-  FETCH_BRANDS_SELECT
-} from './constants';
+  FETCH_BRANDS_SELECT,
+} from "./constants";
 
-import handleError from '../../utils/error';
-import { formSelect } from '../../helpers/select';
+import handleError from "../../utils/error";
+import { formSelect } from "../../helpers/select";
 
 export const brandChange = (name, value) => {
   let formData = {};
@@ -27,13 +27,13 @@ export const brandChange = (name, value) => {
 
   return {
     type: BRAND_CHANGE,
-    payload: formData
+    payload: formData,
   };
 };
 
 export const toggleAddBrand = () => {
   return {
-    type: TOGGLE_ADD_BRAND
+    type: TOGGLE_ADD_BRAND,
   };
 };
 
@@ -44,7 +44,7 @@ export const fetchBrands = () => {
 
       dispatch({
         type: FETCH_BRANDS,
-        payload: response.data.brands
+        payload: response.data.brands,
       });
     } catch (error) {
       const title = `Please try again!`;
@@ -53,10 +53,10 @@ export const fetchBrands = () => {
   };
 };
 
-export const brandSelect = value => {
+export const brandSelect = (value) => {
   return {
     type: BRAND_SELECT,
-    payload: value
+    payload: value,
   };
 };
 
@@ -69,7 +69,7 @@ export const fetchBrandsSelect = () => {
 
       dispatch({
         type: FETCH_BRANDS_SELECT,
-        payload: formulatedBrands
+        payload: formulatedBrands,
       });
     } catch (error) {
       const title = `Please try again!`;
@@ -85,15 +85,15 @@ export const deleteBrand = (id, index) => {
 
       const successfulOptions = {
         title: `${response.data.message}`,
-        position: 'tr',
-        autoDismiss: 1
+        position: "tr",
+        autoDismiss: 1,
       };
 
       if (response.data.success == true) {
         dispatch(success(successfulOptions));
         dispatch({
           type: REMOVE_BRAND,
-          payload: index
+          payload: index,
         });
       }
     } catch (error) {
@@ -112,15 +112,15 @@ export const addBrand = () => {
 
       const successfulOptions = {
         title: `${response.data.message}`,
-        position: 'tr',
-        autoDismiss: 1
+        position: "tr",
+        autoDismiss: 1,
       };
 
       if (response.data.success == true) {
         dispatch(success(successfulOptions));
         dispatch({
           type: ADD_BRAND,
-          payload: response.data.brand
+          payload: response.data.brand,
         });
         dispatch({ type: RESET_BRAND });
         dispatch(toggleAddBrand());

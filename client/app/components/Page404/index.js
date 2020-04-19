@@ -4,11 +4,11 @@
  *
  */
 
-import React from 'react';
+import React from "react";
 
-const Page404 = props => {
+const Page404 = (props) => {
   return (
-    <div className='page-404'>The page you are looking for was not found.</div>
+    <div className="page-404">The page you are looking for was not found.</div>
   );
 };
 

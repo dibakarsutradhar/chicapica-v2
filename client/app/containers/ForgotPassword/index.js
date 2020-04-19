@@ -4,14 +4,14 @@
  *
  */
 
-import React from 'react';
-import { connect } from 'react-redux';
+import React from "react";
+import { connect } from "react-redux";
 
-import { Row, Col } from 'reactstrap';
-import { Redirect, Link } from 'react-router-dom';
+import { Row, Col } from "reactstrap";
+import { Redirect, Link } from "react-router-dom";
 
-import actions from '../../actions';
-import Input from '../../components/Input';
+import actions from "../../actions";
+import Input from "../../components/Input";
 
 class ForgotPassword extends React.PureComponent {
   render() {
@@ -19,22 +19,22 @@ class ForgotPassword extends React.PureComponent {
       authenticated,
       forgotFormData,
       forgotPasswordChange,
-      forgotPassowrd
+      forgotPassowrd,
     } = this.props;
 
-    if (authenticated) return <Redirect to='/dashboard' />;
+    if (authenticated) return <Redirect to="/dashboard" />;
 
     return (
-      <div className='forgot-password-form'>
+      <div className="forgot-password-form">
         <h1>Forgot Password</h1>
         <hr />
         <Row>
-          <Col xs='12' md='6'>
+          <Col xs="12" md="6">
             <Input
-              type={'text'}
-              label={'Email Address'}
-              name={'email'}
-              placeholder={'Please Enter Your Email'}
+              type={"text"}
+              label={"Email Address"}
+              name={"email"}
+              placeholder={"Please Enter Your Email"}
               value={forgotFormData.email}
               onInputChange={(name, value) => {
                 forgotPasswordChange(name, value);
@@ -43,16 +43,16 @@ class ForgotPassword extends React.PureComponent {
           </Col>
         </Row>
         <hr />
-        <div className='login-actions'>
+        <div className="login-actions">
           <button
-            className='input-btn'
-            type='submit'
+            className="input-btn"
+            type="submit"
             onClick={() => forgotPassowrd()}
           >
             Send Email
           </button>
 
-          <Link className='redirect-link' to={'/login'}>
+          <Link className="redirect-link" to={"/login"}>
             Back to login
           </Link>
         </div>
@@ -61,14 +61,11 @@ class ForgotPassword extends React.PureComponent {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     authenticated: state.authentication.authenticated,
-    forgotFormData: state.forgotPassword.forgotFormData
+    forgotFormData: state.forgotPassword.forgotFormData,
   };
 };
 
-export default connect(
-  mapStateToProps,
-  actions
-)(ForgotPassword);
+export default connect(mapStateToProps, actions)(ForgotPassword);

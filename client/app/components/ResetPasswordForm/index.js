@@ -4,36 +4,36 @@
  *
  */
 
-import React from 'react';
+import React from "react";
 
-import { Row, Col } from 'reactstrap';
+import { Row, Col } from "reactstrap";
 
-import Input from '../Input';
+import Input from "../Input";
 
-const ResetPasswordForm = props => {
+const ResetPasswordForm = (props) => {
   const { resetFormData, resetPasswordChange, resetPassowrd } = props;
 
   return (
-    <div className='reset-password-form'>
+    <div className="reset-password-form">
       <Row>
-        <Col xs='12' md='6'>
+        <Col xs="12" md="6">
           <Input
-            type={'password'}
-            label={'Password'}
-            name={'password'}
-            placeholder={'Please Enter Your Email'}
+            type={"password"}
+            label={"Password"}
+            name={"password"}
+            placeholder={"Please Enter Your Email"}
             value={resetFormData.password}
             onInputChange={(name, value) => {
               resetPasswordChange(name, value);
             }}
           />
         </Col>
-        <Col xs='12' md='6'>
+        <Col xs="12" md="6">
           <Input
-            type={'password'}
-            label={'Confirm Password'}
-            name={'confirmPassword'}
-            placeholder={'Please Enter Your Email'}
+            type={"password"}
+            label={"Confirm Password"}
+            name={"confirmPassword"}
+            placeholder={"Please Enter Your Email"}
             value={resetFormData.confirmPassword}
             onInputChange={(name, value) => {
               resetPasswordChange(name, value);
@@ -42,10 +42,10 @@ const ResetPasswordForm = props => {
         </Col>
       </Row>
       <hr />
-      <div className='reset-actions'>
+      <div className="reset-actions">
         <button
-          className='input-btn'
-          type='submit'
+          className="input-btn"
+          type="submit"
           onClick={() => resetPassowrd()}
         >
           Reset Password

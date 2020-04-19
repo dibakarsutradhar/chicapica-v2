@@ -12,8 +12,8 @@ import {
   ADD_BRAND,
   REMOVE_BRAND,
   FETCH_BRANDS_SELECT,
-  BRAND_SELECT
-} from './constants';
+  BRAND_SELECT,
+} from "./constants";
 
 const initialState = {
   brands: [],
@@ -21,26 +21,26 @@ const initialState = {
   brandsSelect: [],
   selectedBrands: [],
   brandFormData: {
-    name: '',
-    description: ''
+    name: "",
+    description: "",
   },
   columns: [
     {
       hidden: true,
-      dataField: '_id',
-      text: ''
+      dataField: "_id",
+      text: "",
     },
     {
-      dataField: 'name',
-      text: 'Brand Name',
-      sort: true
+      dataField: "name",
+      text: "Brand Name",
+      sort: true,
     },
     {
-      dataField: 'description',
-      text: 'Brand Description',
-      classes: 'desc-column'
-    }
-  ]
+      dataField: "description",
+      text: "Brand Description",
+      classes: "desc-column",
+    },
+  ],
 };
 
 const brandReducer = (state = initialState, action) => {
@@ -48,41 +48,41 @@ const brandReducer = (state = initialState, action) => {
     case FETCH_BRANDS:
       return {
         ...state,
-        brands: action.payload
+        brands: action.payload,
       };
     case FETCH_BRANDS_SELECT:
       return { ...state, brandsSelect: action.payload };
     case BRAND_SELECT:
       return {
         ...state,
-        selectedBrands: action.payload
+        selectedBrands: action.payload,
       };
     case ADD_BRAND:
       return {
         ...state,
-        brands: [...state.brands, action.payload]
+        brands: [...state.brands, action.payload],
       };
     case REMOVE_BRAND:
       return {
         ...state,
         brands: [
           ...state.brands.slice(0, action.payload),
-          ...state.brands.slice(action.payload + 1)
-        ]
+          ...state.brands.slice(action.payload + 1),
+        ],
       };
     case BRAND_CHANGE:
       return {
         ...state,
-        brandFormData: { ...state.brandFormData, ...action.payload }
+        brandFormData: { ...state.brandFormData, ...action.payload },
       };
     case RESET_BRAND:
       return {
         ...state,
         brandFormData: {
-          name: '',
-          description: ''
+          name: "",
+          description: "",
         },
-        selectedBrands: []
+        selectedBrands: [],
       };
     case TOGGLE_ADD_BRAND:
       return { ...state, isBrandAddOpen: !state.isBrandAddOpen };

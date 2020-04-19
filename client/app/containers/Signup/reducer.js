@@ -8,18 +8,18 @@ import {
   SIGNUP_CHANGE,
   SIGNUP_RESET,
   SET_SIGNUP_LOADING,
-  SUBSCRIBE_CHANGE
-} from './constants';
+  SUBSCRIBE_CHANGE,
+} from "./constants";
 
 const initialState = {
   signupFormData: {
-    email: '',
-    firstName: '',
-    lastName: '',
-    password: ''
+    email: "",
+    firstName: "",
+    lastName: "",
+    password: "",
   },
   isLoading: false,
-  isSubscribed: false
+  isSubscribed: false,
 };
 
 const signupReducer = (state = initialState, action) => {
@@ -27,23 +27,23 @@ const signupReducer = (state = initialState, action) => {
     case SIGNUP_CHANGE:
       return {
         ...state,
-        signupFormData: { ...state.signupFormData, ...action.payload }
+        signupFormData: { ...state.signupFormData, ...action.payload },
       };
     case SIGNUP_RESET:
       return {
         ...state,
         signupFormData: {
-          email: '',
-          firstName: '',
-          lastName: '',
-          password: ''
+          email: "",
+          firstName: "",
+          lastName: "",
+          password: "",
         },
-        isLoading: false
+        isLoading: false,
       };
     case SET_SIGNUP_LOADING:
       return {
         ...state,
-        isLoading: action.payload
+        isLoading: action.payload,
       };
     case SUBSCRIBE_CHANGE:
       return { ...state, isSubscribed: !state.isSubscribed };

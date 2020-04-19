@@ -27,9 +27,9 @@ class BrandPage extends React.PureComponent {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    brands: state.brand.brands
+    brands: state.brand.brands,
   };
 };
 

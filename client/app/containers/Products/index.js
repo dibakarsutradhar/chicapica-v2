@@ -4,23 +4,23 @@
  *
  */
 
-import React from 'react';
-import { connect } from 'react-redux';
+import React from "react";
+import { connect } from "react-redux";
 
-import actions from '../../actions';
+import actions from "../../actions";
 
-import ProductList from '../../components/ProductList';
+import ProductList from "../../components/ProductList";
 
 class Products extends React.PureComponent {
   componentWillMount() {
     const slug = this.props.match.params.slug;
-    this.props.fetchProducts('category', slug);
+    this.props.fetchProducts("category", slug);
   }
 
   componentDidUpdate(prevProps) {
     if (this.props.match.params.slug !== prevProps.match.params.slug) {
       const slug = this.props.match.params.slug;
-      this.props.fetchProducts('category', slug);
+      this.props.fetchProducts("category", slug);
     }
   }
 
@@ -28,20 +28,17 @@ class Products extends React.PureComponent {
     const { products } = this.props;
 
     return (
-      <div className='products'>
+      <div className="products">
         <ProductList products={products} />
       </div>
     );
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    products: state.product.products
+    products: state.product.products,
   };
 };
 
-export default connect(
-  mapStateToProps,
-  actions
-)(Products);
+export default connect(mapStateToProps, actions)(Products);

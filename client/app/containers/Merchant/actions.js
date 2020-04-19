@@ -4,16 +4,16 @@
  *
  */
 
-import { success } from 'react-notification-system-redux';
-import axios from 'axios';
+import { success } from "react-notification-system-redux";
+import axios from "axios";
 
 import {
   FETCH_MERCHANTS,
   SELL_FORM_CHANGE,
-  SELL_FORM_CHANGE_RESET
-} from './constants';
+  SELL_FORM_CHANGE_RESET,
+} from "./constants";
 
-import handleError from '../../utils/error';
+import handleError from "../../utils/error";
 
 export const sellFormChange = (name, value) => {
   let formData = {};
@@ -21,7 +21,7 @@ export const sellFormChange = (name, value) => {
 
   return {
     type: SELL_FORM_CHANGE,
-    payload: formData
+    payload: formData,
   };
 };
 
@@ -30,12 +30,12 @@ export const sellWithUs = () => {
     const merchant = getState().merchant.sellFormData;
 
     try {
-      const response = await axios.post('/api/merchant/add', merchant);
+      const response = await axios.post("/api/merchant/add", merchant);
 
       const successfulOptions = {
         title: `${response.data.message}`,
-        position: 'tr',
-        autoDismiss: 1
+        position: "tr",
+        autoDismiss: 1,
       };
 
       dispatch(success(successfulOptions));
@@ -55,7 +55,7 @@ export const fetchMerchants = () => {
 
       dispatch({
         type: FETCH_MERCHANTS,
-        payload: response.data.merchants
+        payload: response.data.merchants,
       });
     } catch (error) {
       const title = `Please try again!`;

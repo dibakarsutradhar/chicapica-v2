@@ -4,16 +4,16 @@
  *
  */
 
-import { TOGGLE_MENU, TOGGLE_CART } from './constants';
+import { TOGGLE_MENU, TOGGLE_CART } from "./constants";
 
 export const toggleMenu = () => {
   return {
-    type: TOGGLE_MENU
+    type: TOGGLE_MENU,
   };
 };
 
 export const toggleCart = () => {
   return {
-    type: TOGGLE_CART
+    type: TOGGLE_CART,
   };
 };

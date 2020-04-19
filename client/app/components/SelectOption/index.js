@@ -4,11 +4,11 @@
  *
  */
 
-import React from 'react';
+import React from "react";
 
-import Select from 'react-select';
+import Select from "react-select";
 
-const SelectOption = props => {
+const SelectOption = (props) => {
   const { label, multi, options, value, handleSelectChange } = props;
 
   function _handleSelectChange(value) {
@@ -16,7 +16,7 @@ const SelectOption = props => {
   }
 
   return (
-    <div className='select-box'>
+    <div className="select-box">
       {label && <label>{label}</label>}
       <Select
         isMulti={multi}

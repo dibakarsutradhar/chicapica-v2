@@ -4,4 +4,4 @@
  *
  */
 
-export const DEFAULT_ACTION = 'src/Products/DEFAULT_ACTION';
+export const DEFAULT_ACTION = "src/Products/DEFAULT_ACTION";

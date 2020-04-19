@@ -4,7 +4,7 @@
  *
  */
 
-import { DEFAULT_ACTION } from './constants';
+import { DEFAULT_ACTION } from "./constants";
 
 const initialState = {};
 
@@ -12,7 +12,7 @@ const productsReducer = (state = initialState, action) => {
   switch (action.type) {
     case DEFAULT_ACTION:
       return {
-        ...state
+        ...state,
       };
     default:
       return state;

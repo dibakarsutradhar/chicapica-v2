@@ -1,13 +1,13 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const passport = require('passport');
+const passport = require("passport");
 
 // Bring in Models & Helpers
-const Brand = require('../../models/brand');
+const Brand = require("../../models/brand");
 
 router.post(
-  '/add',
-  passport.authenticate('jwt', { session: false }),
+  "/add",
+  passport.authenticate("jwt", { session: false }),
   (req, res) => {
     const name = req.body.name;
     const description = req.body.description;
@@ -15,77 +15,77 @@ router.post(
     if (!description || !name) {
       return res
         .status(422)
-        .json({ error: 'You must enter description & name.' });
+        .json({ error: "You must enter description & name." });
     }
 
     const brand = new Brand({
       name,
-      description
+      description,
     });
 
     brand.save((err, brand) => {
       if (err) {
         return res.status(422).json({
-          error: 'Your request could not be processed. Please try again.'
+          error: "Your request could not be processed. Please try again.",
         });
       }
 
       res.status(200).json({
         success: true,
         message: `Brand has been added successfully!`,
-        brand: brand
+        brand: brand,
       });
     });
   }
 );
 
 // fetch all brands api
-router.get('/list', (req, res) => {
+router.get("/list", (req, res) => {
   Brand.find({}, (err, data) => {
     if (err) {
       return res.status(422).json({
-        error: 'Your request could not be processed. Please try again.'
+        error: "Your request could not be processed. Please try again.",
       });
     }
     res.status(200).json({
-      brands: data
+      brands: data,
     });
   });
 });
 
 router.get(
-  '/list/select',
-  passport.authenticate('jwt', { session: false }),
+  "/list/select",
+  passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    Brand.find({}, 'name', (err, data) => {
+    Brand.find({}, "name", (err, data) => {
       if (err) {
         return res.status(422).json({
-          error: 'Your request could not be processed. Please try again.'
+          error: "Your request could not be processed. Please try again.",
         });
       }
 
       res.status(200).json({
-        brands: data
+        brands: data,
       });
     });
   }
 );
 
 router.delete(
-  '/delete/:id',
-  passport.authenticate('jwt', { session: false }),
+  "/delete/:id",
+  passport.authenticate("jwt", { session: false }),
   (req, res) => {
     Brand.deleteOne({ _id: req.params.id }, (err, data) => {
       if (err) {
         return res.status(422).json({
-          error: 'Your request could not be processed. Please try again.'
+          error: "Your request could not be processed. Please try again.",
         });
       }
 
       res.status(200).json({
         success: true,
         message: `Brand has been deleted successfully!`,
-        brand: data
+        brand: data,
       });
     });
   }

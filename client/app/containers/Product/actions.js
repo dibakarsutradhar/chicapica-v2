@@ -4,8 +4,8 @@
  *
  */
 
-import { success } from 'react-notification-system-redux';
-import axios from 'axios';
+import { success } from "react-notification-system-redux";
+import axios from "axios";
 
 import {
   FETCH_PRODUCTS,
@@ -16,13 +16,13 @@ import {
   ADD_PRODUCT,
   REMOVE_PRODUCT,
   PRODUCT_SELECT,
-  FETCH_PRODUCTS_SELECT
-} from './constants';
+  FETCH_PRODUCTS_SELECT,
+} from "./constants";
 
-import { RESET_BRAND } from '../Brand/constants';
+import { RESET_BRAND } from "../Brand/constants";
 
-import handleError from '../../utils/error';
-import { formSelect } from '../../helpers/select';
+import handleError from "../../utils/error";
+import { formSelect } from "../../helpers/select";
 
 export const productChange = (name, value) => {
   let formData = {};
@@ -30,23 +30,23 @@ export const productChange = (name, value) => {
 
   return {
     type: PRODUCT_CHANGE,
-    payload: formData
+    payload: formData,
   };
 };
 
 export const toggleAddProduct = () => {
   return {
-    type: TOGGLE_ADD_PRODUCT
+    type: TOGGLE_ADD_PRODUCT,
   };
 };
 
 export const fetchProducts = (filter, slug) => {
   return async (dispatch, getState) => {
     try {
-      let api = '';
+      let api = "";
 
       if (!slug) {
-        api = filterProductApi('all', slug);
+        api = filterProductApi("all", slug);
       } else {
         api = filterProductApi(filter, slug);
       }
@@ -55,7 +55,7 @@ export const fetchProducts = (filter, slug) => {
 
       dispatch({
         type: FETCH_PRODUCTS,
-        payload: response.data.products
+        payload: response.data.products,
       });
     } catch (error) {
       const title = `Please try again!`;
@@ -64,14 +64,14 @@ export const fetchProducts = (filter, slug) => {
   };
 };
 
-export const fetchProduct = slug => {
+export const fetchProduct = (slug) => {
   return async (dispatch, getState) => {
     try {
       const response = await axios.get(`/api/product/item/${slug}`);
 
       dispatch({
         type: FETCH_PRODUCT,
-        payload: response.data.product
+        payload: response.data.product,
       });
     } catch (error) {
       const title = `Please try again!`;
@@ -80,10 +80,10 @@ export const fetchProduct = slug => {
   };
 };
 
-export const productSelect = value => {
+export const productSelect = (value) => {
   return {
     type: PRODUCT_SELECT,
-    payload: value
+    payload: value,
   };
 };
 
@@ -96,7 +96,7 @@ export const fetchProductsSelect = () => {
 
       dispatch({
         type: FETCH_PRODUCTS_SELECT,
-        payload: formulatedProducts
+        payload: formulatedProducts,
       });
     } catch (error) {
       const title = `Please try again!`;
@@ -112,15 +112,15 @@ export const deleteProduct = (id, index) => {
 
       const successfulOptions = {
         title: `${response.data.message}`,
-        position: 'tr',
-        autoDismiss: 1
+        position: "tr",
+        autoDismiss: 1,
       };
 
       if (response.data.success == true) {
         dispatch(success(successfulOptions));
         dispatch({
           type: REMOVE_PRODUCT,
-          payload: index
+          payload: index,
         });
       }
     } catch (error) {
@@ -138,22 +138,22 @@ export const addProduct = () => {
 
       const newProduct = {
         ...product,
-        brand: brand
+        brand: brand,
       };
 
       const response = await axios.post(`/api/product/add`, newProduct);
 
       const successfulOptions = {
         title: `${response.data.message}`,
-        position: 'tr',
-        autoDismiss: 1
+        position: "tr",
+        autoDismiss: 1,
       };
 
       if (response.data.success == true) {
         dispatch(success(successfulOptions));
         dispatch({
           type: ADD_PRODUCT,
-          payload: response.data.product
+          payload: response.data.product,
         });
         dispatch({ type: RESET_PRODUCT });
         dispatch({ type: RESET_BRAND });
@@ -167,15 +167,15 @@ export const addProduct = () => {
 };
 
 const filterProductApi = (filter, slug) => {
-  let api = '';
+  let api = "";
   switch (filter) {
-    case 'all':
+    case "all":
       api = ``;
       break;
-    case 'category':
+    case "category":
       api = `/${filter}/${slug}`;
       break;
-    case 'brand':
+    case "brand":
       api = `/${filter}/${slug}`;
       break;
     default:

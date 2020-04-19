@@ -4,11 +4,11 @@
  *
  */
 
-import axios from 'axios';
+import axios from "axios";
 
-import { FETCH_USERS } from './constants';
+import { FETCH_USERS } from "./constants";
 
-import handleError from '../../utils/error';
+import handleError from "../../utils/error";
 
 export const fetchUsers = () => {
   return async (dispatch, getState) => {

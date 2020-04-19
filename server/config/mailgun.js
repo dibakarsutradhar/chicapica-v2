@@ -1,6 +1,6 @@
-const mailgun = require('mailgun-js')({
+const mailgun = require("mailgun-js")({
   apiKey: process.env.MAILGUN_KEY,
-  domain: process.env.MAILGUN_DOMAIN
+  domain: process.env.MAILGUN_DOMAIN,
 });
 
 const sender = process.env.MAILGUN_EMAIL_SENDER;
@@ -10,7 +10,7 @@ exports.sendEmail = (recipient, message) => {
     from: `Mo Store!! <${sender}>`,
     to: recipient,
     subject: message.subject,
-    text: message.text
+    text: message.text,
   };
 
   mailgun.messages().send(data, (error, body) => {

@@ -38,7 +38,7 @@ class ProductPage extends React.PureComponent {
       itemsInCart,
       productChange,
       handleAddToCart,
-      handleRemoveFromCart
+      handleRemoveFromCart,
     } = this.props;
 
     return (
@@ -103,11 +103,11 @@ class ProductPage extends React.PureComponent {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     product: state.product.product,
     productFormData: state.product.productFormData,
-    itemsInCart: state.cart.itemsInCart
+    itemsInCart: state.cart.itemsInCart,
   };
 };
 

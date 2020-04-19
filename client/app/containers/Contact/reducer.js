@@ -4,14 +4,14 @@
  *
  */
 
-import { CONTACT_FORM_CHANGE, CONTACT_RESET } from './constants';
+import { CONTACT_FORM_CHANGE, CONTACT_RESET } from "./constants";
 
 const initialState = {
   contactFormData: {
-    name: '',
-    email: '',
-    message: ''
-  }
+    name: "",
+    email: "",
+    message: "",
+  },
 };
 
 const contactReducer = (state = initialState, action) => {
@@ -19,16 +19,16 @@ const contactReducer = (state = initialState, action) => {
     case CONTACT_FORM_CHANGE:
       return {
         ...state,
-        contactFormData: { ...state.contactFormData, ...action.payload }
+        contactFormData: { ...state.contactFormData, ...action.payload },
       };
     case CONTACT_RESET:
       return {
         ...state,
         contactFormData: {
-          name: '',
-          email: '',
-          message: ''
-        }
+          name: "",
+          email: "",
+          message: "",
+        },
       };
     default:
       return state;

@@ -4,10 +4,10 @@
  *
  */
 
-import { SET_AUTH, SET_UN_AUTH } from './constants';
+import { SET_AUTH, SET_UN_AUTH } from "./constants";
 
 const initialState = {
-  authenticated: false
+  authenticated: false,
 };
 
 const authenticationReducer = (state = initialState, action) => {

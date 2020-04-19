@@ -4,14 +4,14 @@
  *
  */
 
-import { TOGGLE_ADMIN_MENU } from './constants';
+import { TOGGLE_ADMIN_MENU } from "./constants";
 
 const initialState = {
   isMenuOpen: false,
   customerLinks: [
-    { to: '', name: 'account details' },
-    { to: '/orders', name: 'manage orders' }
-  ]
+    { to: "", name: "account details" },
+    { to: "/orders", name: "manage orders" },
+  ],
 };
 
 const customerReducer = (state = initialState, action) => {

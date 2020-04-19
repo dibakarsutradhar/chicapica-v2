@@ -4,13 +4,13 @@
  *
  */
 
-import React from 'react';
-import { connect } from 'react-redux';
+import React from "react";
+import { connect } from "react-redux";
 
-import actions from '../../actions';
+import actions from "../../actions";
 
-import Table from '../../components/Table';
-import SubPage from '../../components/SubPage';
+import Table from "../../components/Table";
+import SubPage from "../../components/SubPage";
 
 class Merchant extends React.PureComponent {
   componentDidMount() {
@@ -21,8 +21,8 @@ class Merchant extends React.PureComponent {
     const { merchants, columns } = this.props;
 
     return (
-      <div className='merchants'>
-        <SubPage title={'Merchant List'} isMenuOpen={null} />
+      <div className="merchants">
+        <SubPage title={"Merchant List"} isMenuOpen={null} />
         <Table
           data={merchants}
           columns={columns}
@@ -37,14 +37,11 @@ class Merchant extends React.PureComponent {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     merchants: state.merchant.merchants,
-    columns: state.merchant.columns
+    columns: state.merchant.columns,
   };
 };
 
-export default connect(
-  mapStateToProps,
-  actions
-)(Merchant);
+export default connect(mapStateToProps, actions)(Merchant);

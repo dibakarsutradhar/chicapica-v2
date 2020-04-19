@@ -4,12 +4,12 @@
  *
  */
 
-import { FORGOT_PASSWORD_CHANGE, FORGOT_PASSWORD_RESET } from './constants';
+import { FORGOT_PASSWORD_CHANGE, FORGOT_PASSWORD_RESET } from "./constants";
 
 const initialState = {
   forgotFormData: {
-    email: ''
-  }
+    email: "",
+  },
 };
 
 const forgotPasswordReducer = (state = initialState, action) => {
@@ -18,15 +18,15 @@ const forgotPasswordReducer = (state = initialState, action) => {
       return {
         ...state,
         forgotFormData: {
-          email: action.payload
-        }
+          email: action.payload,
+        },
       };
     case FORGOT_PASSWORD_RESET:
       return {
         ...state,
         forgotFormData: {
-          email: ''
-        }
+          email: "",
+        },
       };
     default:
       return state;

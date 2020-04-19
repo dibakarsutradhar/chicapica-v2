@@ -4,4 +4,4 @@
  *
  */
 
-export const DEFAULT_ACTION = 'src/Homepage/DEFAULT_ACTION';
+export const DEFAULT_ACTION = "src/Homepage/DEFAULT_ACTION";

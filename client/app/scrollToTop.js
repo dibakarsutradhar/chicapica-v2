@@ -4,16 +4,16 @@
  * scroll restoration
  */
 
-import React from 'react';
+import React from "react";
 
-import { withRouter } from 'react-router-dom';
+import { withRouter } from "react-router-dom";
 
 class ScrollToTop extends React.Component {
   componentDidUpdate(prevProps) {
     if (this.props.location.pathname !== prevProps.location.pathname) {
       window.scroll({
         top: 0,
-        behavior: 'smooth'
+        behavior: "smooth",
       });
     }
   }

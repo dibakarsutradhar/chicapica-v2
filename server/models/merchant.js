@@ -1,30 +1,30 @@
-const Mongoose = require('mongoose');
+const Mongoose = require("mongoose");
 const { Schema } = Mongoose;
 
 // Merchant Schema
 const MerchantSchema = new Schema({
   name: {
     type: String,
-    trim: true
+    trim: true,
   },
   email: {
-    type: String
+    type: String,
   },
   phoneNumber: {
-    type: String
+    type: String,
   },
   brand: {
-    type: String
+    type: String,
   },
   business: {
     type: String,
-    trim: true
+    trim: true,
   },
   updated: Date,
   created: {
     type: Date,
-    default: Date.now
-  }
+    default: Date.now,
+  },
 });
 
-module.exports = Mongoose.model('Merchant', MerchantSchema);
+module.exports = Mongoose.model("Merchant", MerchantSchema);

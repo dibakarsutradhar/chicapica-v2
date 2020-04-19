@@ -1,35 +1,35 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const crypto = require('crypto');
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const crypto = require("crypto");
 
 // Bring in Models & Helpers
-const User = require('../../models/user');
-const mailgun = require('../../config/mailgun');
-const template = require('../../config/template');
+const User = require("../../models/user");
+const mailgun = require("../../config/mailgun");
+const template = require("../../config/template");
 
 const key = process.env.SECRET_OR_KEY;
 
-router.post('/login', (req, res) => {
+router.post("/login", (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
 
   if (!email) {
-    return res.status(422).json({ error: 'You must enter an email address.' });
+    return res.status(422).json({ error: "You must enter an email address." });
   }
 
   if (!password) {
-    return res.status(422).json({ error: 'You must enter a password.' });
+    return res.status(422).json({ error: "You must enter a password." });
   }
 
-  User.findOne({ email }).then(user => {
+  User.findOne({ email }).then((user) => {
     if (!user) {
       return res
         .status(422)
-        .send({ error: 'no user found for this email address.' });
+        .send({ error: "no user found for this email address." });
     }
-    bcrypt.compare(password, user.password).then(isMatch => {
+    bcrypt.compare(password, user.password).then((isMatch) => {
       if (isMatch) {
         const payload = { id: user.id };
         jwt.sign(payload, key, { expiresIn: 3600 }, (err, token) => {
@@ -41,24 +41,24 @@ router.post('/login', (req, res) => {
               profile: {
                 firstName: user.profile.firstName,
                 lastName: user.profile.lastName,
-                is_subscribed: user.profile.is_subscribed
+                is_subscribed: user.profile.is_subscribed,
               },
               email: user.email,
-              role: user.role
-            }
+              role: user.role,
+            },
           });
         });
       } else {
         return res.status(404).json({
           success: false,
-          error: 'Password Incorrect'
+          error: "Password Incorrect",
         });
       }
     });
   });
 });
 
-router.post('/register', (req, res, next) => {
+router.post("/register", (req, res, next) => {
   const email = req.body.email;
   const firstName = req.body.firstName;
   const lastName = req.body.lastName;
@@ -66,15 +66,15 @@ router.post('/register', (req, res, next) => {
   const is_subscribed = req.body.isSubscribed;
 
   if (!email) {
-    return res.status(422).json({ error: 'You must enter an email address.' });
+    return res.status(422).json({ error: "You must enter an email address." });
   }
 
   if (!firstName || !lastName) {
-    return res.status(422).json({ error: 'You must enter your full name.' });
+    return res.status(422).json({ error: "You must enter your full name." });
   }
 
   if (!password) {
-    return res.status(422).json({ error: 'You must enter a password.' });
+    return res.status(422).json({ error: "You must enter a password." });
   }
 
   User.findOne({ email }, (err, existingUser) => {
@@ -85,20 +85,20 @@ router.post('/register', (req, res, next) => {
     if (existingUser) {
       return res
         .status(422)
-        .json({ error: 'That email address is already in use.' });
+        .json({ error: "That email address is already in use." });
     }
 
     const user = new User({
       email,
       password,
-      profile: { firstName, lastName, is_subscribed }
+      profile: { firstName, lastName, is_subscribed },
     });
 
     bcrypt.genSalt(10, (err, salt) => {
       bcrypt.hash(user.password, salt, (err, hash) => {
         if (err) {
           return res.status(422).json({
-            error: 'Your request could not be processed. Please try again.'
+            error: "Your request could not be processed. Please try again.",
           });
         }
         user.password = hash;
@@ -106,7 +106,7 @@ router.post('/register', (req, res, next) => {
         user.save((err, user) => {
           if (err) {
             return res.status(422).json({
-              error: 'Your request could not be processed. Please try again.'
+              error: "Your request could not be processed. Please try again.",
             });
           }
 
@@ -121,11 +121,11 @@ router.post('/register', (req, res, next) => {
                 profile: {
                   firstName: user.profile.firstName,
                   lastName: user.profile.lastName,
-                  is_subscribed: user.profile.is_subscribed
+                  is_subscribed: user.profile.is_subscribed,
                 },
                 email: user.email,
-                role: user.role
-              }
+                role: user.role,
+              },
             });
           });
 
@@ -138,32 +138,32 @@ router.post('/register', (req, res, next) => {
   });
 });
 
-router.post('/forgot', (req, res, next) => {
+router.post("/forgot", (req, res, next) => {
   const email = req.body.email;
 
   User.findOne({ email }, (err, existingUser) => {
     if (err || existingUser == null) {
       return res.status(422).json({
         error:
-          'Your request could not be processed as entered. Please try again.'
+          "Your request could not be processed as entered. Please try again.",
       });
     }
 
     crypto.randomBytes(48, (err, buffer) => {
-      const resetToken = buffer.toString('hex');
+      const resetToken = buffer.toString("hex");
       if (err) {
         return res.status(422).json({
-          error: 'Your request could not be processed. Please try again.'
+          error: "Your request could not be processed. Please try again.",
         });
       }
 
       existingUser.resetPasswordToken = resetToken;
       existingUser.resetPasswordExpires = Date.now() + 3600000;
 
-      existingUser.save(err => {
+      existingUser.save((err) => {
         if (err) {
           return res.status(422).json({
-            error: 'Your request could not be processed. Please try again.'
+            error: "Your request could not be processed. Please try again.",
           });
         }
 
@@ -174,30 +174,30 @@ router.post('/forgot', (req, res, next) => {
         return res.status(200).json({
           success: true,
           message:
-            'Please check your email for the link to reset your password.'
+            "Please check your email for the link to reset your password.",
         });
       });
     });
   });
 });
 
-router.post('/reset/:token', (req, res, next) => {
+router.post("/reset/:token", (req, res, next) => {
   const password = req.body.password;
 
   if (!password) {
-    return res.status(422).json({ error: 'You must enter a password.' });
+    return res.status(422).json({ error: "You must enter a password." });
   }
 
   User.findOne(
     {
       resetPasswordToken: req.params.token,
-      resetPasswordExpires: { $gt: Date.now() }
+      resetPasswordExpires: { $gt: Date.now() },
     },
     (err, resetUser) => {
       if (!resetUser) {
         return res.status(422).json({
           error:
-            'Your token has expired. Please attempt to reset your password again.'
+            "Your token has expired. Please attempt to reset your password again.",
         });
       }
       bcrypt.genSalt(10, (err, salt) => {
@@ -205,7 +205,7 @@ router.post('/reset/:token', (req, res, next) => {
           if (err) {
             return res.status(422).json({
               error:
-                'Your request could not be processed as entered. Please try again.'
+                "Your request could not be processed as entered. Please try again.",
             });
           }
           req.body.password = hash;
@@ -214,11 +214,11 @@ router.post('/reset/:token', (req, res, next) => {
           resetUser.resetPasswordToken = undefined;
           resetUser.resetPasswordExpires = undefined;
 
-          resetUser.save(err => {
+          resetUser.save((err) => {
             if (err) {
               return res.status(422).json({
                 error:
-                  'Your request could not be processed as entered. Please try again.'
+                  "Your request could not be processed as entered. Please try again.",
               });
             }
 
@@ -228,7 +228,7 @@ router.post('/reset/:token', (req, res, next) => {
             return res.status(200).json({
               success: true,
               message:
-                'Password changed successfully. Please login with your new password.'
+                "Password changed successfully. Please login with your new password.",
             });
           });
         });
@@ -237,19 +237,19 @@ router.post('/reset/:token', (req, res, next) => {
   );
 });
 
-router.post('/reset', (req, res, next) => {
+router.post("/reset", (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;
 
   if (!password) {
-    return res.status(422).json({ error: 'You must enter a password.' });
+    return res.status(422).json({ error: "You must enter a password." });
   }
 
   User.findOne({ email }, (err, existingUser) => {
     if (err || existingUser == null) {
       return res.status(422).json({
         error:
-          'Your request could not be processed as entered. Please try again.'
+          "Your request could not be processed as entered. Please try again.",
       });
     }
 
@@ -258,18 +258,18 @@ router.post('/reset', (req, res, next) => {
         if (err) {
           return res.status(422).json({
             error:
-              'Your request could not be processed as entered. Please try again.'
+              "Your request could not be processed as entered. Please try again.",
           });
         }
         req.body.password = hash;
 
         existingUser.password = req.body.password;
 
-        existingUser.save(err => {
+        existingUser.save((err) => {
           if (err) {
             return res.status(422).json({
               error:
-                'Your request could not be processed as entered. Please try again.'
+                "Your request could not be processed as entered. Please try again.",
             });
           }
 
@@ -279,7 +279,7 @@ router.post('/reset', (req, res, next) => {
           return res.status(200).json({
             success: true,
             message:
-              'Password changed successfully. Please login with your new password.'
+              "Password changed successfully. Please login with your new password.",
           });
         });
       });

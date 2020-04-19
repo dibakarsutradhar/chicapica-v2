@@ -4,34 +4,34 @@
  *
  */
 
-import { FETCH_USERS } from './constants';
+import { FETCH_USERS } from "./constants";
 
 const initialState = {
   users: [],
   columns: [
     {
       hidden: true,
-      dataField: '_id',
-      text: ''
+      dataField: "_id",
+      text: "",
     },
     {
-      dataField: 'email',
-      text: 'User Email',
-      classes: 'email-column'
+      dataField: "email",
+      text: "User Email",
+      classes: "email-column",
     },
     {
-      dataField: 'role',
-      text: 'User Role'
+      dataField: "role",
+      text: "User Role",
     },
     {
-      dataField: 'profile.firstName',
-      text: 'First Name'
+      dataField: "profile.firstName",
+      text: "First Name",
     },
     {
-      dataField: 'profile.lastName',
-      text: 'Last Name'
-    }
-  ]
+      dataField: "profile.lastName",
+      text: "Last Name",
+    },
+  ],
 };
 
 const usersReducer = (state = initialState, action) => {
@@ -39,7 +39,7 @@ const usersReducer = (state = initialState, action) => {
     case FETCH_USERS:
       return {
         ...state,
-        users: action.payload
+        users: action.payload,
       };
     default:
       return state;

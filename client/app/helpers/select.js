@@ -4,10 +4,10 @@
  * this helper formulate data to select component
  */
 
-export const formSelect = data => {
+export const formSelect = (data) => {
   let newCategories = [];
 
-  data.map(category => {
+  data.map((category) => {
     let newCategory = {};
 
     newCategory.value = category._id;
@@ -19,10 +19,10 @@ export const formSelect = data => {
   return newCategories;
 };
 
-export const unformSelect = data => {
+export const unformSelect = (data) => {
   let newCategories = [];
 
-  data.map(category => {
+  data.map((category) => {
     let newCategory = {};
 
     newCategory._id = category.value;

@@ -4,14 +4,14 @@
  *
  */
 
-import React from 'react';
-import { connect } from 'react-redux';
+import React from "react";
+import { connect } from "react-redux";
 
-import actions from '../../actions';
+import actions from "../../actions";
 
-import CartList from '../../components/CartList';
-import CartSummary from '../../components/CartSummary';
-import Checkout from '../../components/Checkout';
+import CartList from "../../components/CartList";
+import CartSummary from "../../components/CartSummary";
+import Checkout from "../../components/Checkout";
 
 class Cart extends React.PureComponent {
   render() {
@@ -24,28 +24,28 @@ class Cart extends React.PureComponent {
       handleCheckout,
       handleRemoveFromCart,
       placeOrder,
-      authenticated
+      authenticated,
     } = this.props;
 
     return (
-      <div className='cart'>
-        <div className='cart-header'>
-          {isCartOpen && <span className='close-icon' onClick={toggleCart} />}
+      <div className="cart">
+        <div className="cart-header">
+          {isCartOpen && <span className="close-icon" onClick={toggleCart} />}
         </div>
         {cartItems.length > 0 ? (
-          <div className='cart-body'>
+          <div className="cart-body">
             <CartList
               cartItems={cartItems}
               handleRemoveFromCart={handleRemoveFromCart}
             />
           </div>
         ) : (
-          <div className='empty-cart'>
+          <div className="empty-cart">
             <p>Your shopping cart is empty</p>
           </div>
         )}
         {cartItems.length > 0 && (
-          <div className='cart-checkout'>
+          <div className="cart-checkout">
             <CartSummary cartTotal={cartTotal} />
             <Checkout
               handleShopping={handleShopping}
@@ -60,16 +60,13 @@ class Cart extends React.PureComponent {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     isCartOpen: state.navigation.isCartOpen,
     cartItems: state.cart.cartItems,
     cartTotal: state.cart.cartTotal,
-    authenticated: state.authentication.authenticated
+    authenticated: state.authentication.authenticated,
   };
 };
 
-export default connect(
-  mapStateToProps,
-  actions
-)(Cart);
+export default connect(mapStateToProps, actions)(Cart);

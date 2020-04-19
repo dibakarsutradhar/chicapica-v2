@@ -4,15 +4,15 @@
  *
  */
 
-import React from 'react';
+import React from "react";
 
-const Checkbox = props => {
+const Checkbox = (props) => {
   const { id, label, checked, toggleCheckboxChange } = props;
 
   return (
-    <div className='checkbox'>
+    <div className="checkbox">
       <input
-        type={'checkbox'}
+        type={"checkbox"}
         id={id}
         value={label}
         onChange={toggleCheckboxChange}

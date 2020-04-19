@@ -4,14 +4,14 @@
  *
  */
 
-import React from 'react';
-import { connect } from 'react-redux';
+import React from "react";
+import { connect } from "react-redux";
 
-import actions from '../../actions';
+import actions from "../../actions";
 
-import AddCategory from '../../components/AddCategory';
-import Table from '../../components/Table';
-import SubPage from '../../components/SubPage';
+import AddCategory from "../../components/AddCategory";
+import Table from "../../components/Table";
+import SubPage from "../../components/SubPage";
 
 class Category extends React.PureComponent {
   componentDidMount() {
@@ -31,13 +31,13 @@ class Category extends React.PureComponent {
       deleteCategory,
       products,
       selectedProducts,
-      productSelect
+      productSelect,
     } = this.props;
 
     return (
-      <div className='category'>
+      <div className="category">
         <SubPage
-          title={isCategoryAddOpen ? 'Add Category' : 'Category List'}
+          title={isCategoryAddOpen ? "Add Category" : "Category List"}
           isMenuOpen={isCategoryAddOpen}
           toggleMenu={toggleAddCategory}
         >
@@ -69,18 +69,15 @@ class Category extends React.PureComponent {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     categoryFormData: state.category.categoryFormData,
     isCategoryAddOpen: state.category.isCategoryAddOpen,
     categories: state.category.categories,
     columns: state.category.columns,
     products: state.product.productsSelect,
-    selectedProducts: state.product.selectedProducts
+    selectedProducts: state.product.selectedProducts,
   };
 };
 
-export default connect(
-  mapStateToProps,
-  actions
-)(Category);
+export default connect(mapStateToProps, actions)(Category);

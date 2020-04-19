@@ -1,13 +1,13 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const passport = require('passport');
+const passport = require("passport");
 
 // Bring in Models & Helpers
-const Cart = require('../../models/cart');
+const Cart = require("../../models/cart");
 
 router.post(
-  '/add',
-  passport.authenticate('jwt', { session: false }),
+  "/add",
+  passport.authenticate("jwt", { session: false }),
   (req, res) => {
     const quantity = req.body.product.quantity;
     const item = req.body.product._id;
@@ -16,29 +16,29 @@ router.post(
     const cart = new Cart({
       quantity,
       item,
-      user
+      user,
     });
 
     cart.save((err, cart) => {
       if (err) {
         return res.status(422).json({
-          error: 'Your request could not be processed. Please try again.'
+          error: "Your request could not be processed. Please try again.",
         });
       }
 
       Cart.findById(cart._id)
-        .populate('item', 'name price slug')
+        .populate("item", "name price slug")
         .exec((err, cart) => {
           if (err) {
             return res.status(422).json({
-              error: 'Your request could not be processed. Please try again.'
+              error: "Your request could not be processed. Please try again.",
             });
           }
 
           res.status(200).json({
             success: true,
             message: `Item has been added to your shopping cart!`,
-            cart: cart
+            cart: cart,
           });
         });
     });
@@ -47,39 +47,39 @@ router.post(
 
 // fetch all cart api
 router.get(
-  '/list',
-  passport.authenticate('jwt', { session: false }),
+  "/list",
+  passport.authenticate("jwt", { session: false }),
   (req, res) => {
     Cart.find({})
-      .populate('item', 'name price slug')
+      .populate("item", "name price slug")
       .exec((err, data) => {
         if (err) {
           return res.status(422).json({
-            error: 'Your request could not be processed. Please try again.'
+            error: "Your request could not be processed. Please try again.",
           });
         }
         res.status(200).json({
-          items: data
+          items: data,
         });
       });
   }
 );
 
 router.delete(
-  '/delete/:id',
-  passport.authenticate('jwt', { session: false }),
+  "/delete/:id",
+  passport.authenticate("jwt", { session: false }),
   (req, res) => {
     Cart.deleteOne({ item: req.params.id }, (err, data) => {
       if (err) {
         return res.status(422).json({
-          error: 'Your request could not be processed. Please try again.'
+          error: "Your request could not be processed. Please try again.",
         });
       }
 
       res.status(200).json({
         success: true,
         message: `Item has been removed from your shopping cart!`,
-        cart: data
+        cart: data,
       });
     });
   }

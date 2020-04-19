@@ -4,14 +4,14 @@
  *
  */
 
-import React from 'react';
-import { connect } from 'react-redux';
+import React from "react";
+import { connect } from "react-redux";
 
-import actions from '../../actions';
+import actions from "../../actions";
 
-import AddProduct from '../../components/AddProduct';
-import Table from '../../components/Table';
-import SubPage from '../../components/SubPage';
+import AddProduct from "../../components/AddProduct";
+import Table from "../../components/Table";
+import SubPage from "../../components/SubPage";
 
 class Product extends React.PureComponent {
   componentDidMount() {
@@ -31,13 +31,13 @@ class Product extends React.PureComponent {
       deleteProduct,
       brandSelect,
       selectedBrands,
-      brands
+      brands,
     } = this.props;
 
     return (
-      <div className='product'>
+      <div className="product">
         <SubPage
-          title={isProductAddOpen ? 'Add Product' : 'Product List'}
+          title={isProductAddOpen ? "Add Product" : "Product List"}
           isMenuOpen={isProductAddOpen}
           toggleMenu={toggleAddProduct}
         >
@@ -69,18 +69,15 @@ class Product extends React.PureComponent {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     productFormData: state.product.productFormData,
     products: state.product.products,
     columns: state.product.columns,
     isProductAddOpen: state.product.isProductAddOpen,
     selectedBrands: state.brand.selectedBrands,
-    brands: state.brand.brandsSelect
+    brands: state.brand.brandsSelect,
   };
 };
 
-export default connect(
-  mapStateToProps,
-  actions
-)(Product);
+export default connect(mapStateToProps, actions)(Product);

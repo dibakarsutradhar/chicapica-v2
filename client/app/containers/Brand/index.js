@@ -4,14 +4,14 @@
  *
  */
 
-import React from 'react';
-import { connect } from 'react-redux';
+import React from "react";
+import { connect } from "react-redux";
 
-import actions from '../../actions';
+import actions from "../../actions";
 
-import AddBrand from '../../components/AddBrand';
-import Table from '../../components/Table';
-import SubPage from '../../components/SubPage';
+import AddBrand from "../../components/AddBrand";
+import Table from "../../components/Table";
+import SubPage from "../../components/SubPage";
 
 class Brand extends React.PureComponent {
   componentDidMount() {
@@ -27,13 +27,13 @@ class Brand extends React.PureComponent {
       brands,
       columns,
       toggleAddBrand,
-      deleteBrand
+      deleteBrand,
     } = this.props;
 
     return (
-      <div className='brand'>
+      <div className="brand">
         <SubPage
-          title={isBrandAddOpen ? 'Add Brand' : 'Brand List'}
+          title={isBrandAddOpen ? "Add Brand" : "Brand List"}
           isMenuOpen={isBrandAddOpen}
           toggleMenu={toggleAddBrand}
         >
@@ -62,16 +62,13 @@ class Brand extends React.PureComponent {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     brandFormData: state.brand.brandFormData,
     isBrandAddOpen: state.brand.isBrandAddOpen,
     brands: state.brand.brands,
-    columns: state.brand.columns
+    columns: state.brand.columns,
   };
 };
 
-export default connect(
-  mapStateToProps,
-  actions
-)(Brand);
+export default connect(mapStateToProps, actions)(Brand);

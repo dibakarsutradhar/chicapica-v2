@@ -4,24 +4,24 @@
  *
  */
 
-import React from 'react';
+import React from "react";
 
-const SubPage = props => {
+const SubPage = (props) => {
   const { title, isMenuOpen, toggleMenu, children } = props;
 
   return (
-    <div className='sub-page'>
-      <div className='subpage-header'>
+    <div className="sub-page">
+      <div className="subpage-header">
         <h1>{title}</h1>
         {isMenuOpen !== null && (
-          <div className='action'>
+          <div className="action">
             {isMenuOpen ? (
-              <div className='back' onClick={toggleMenu}>
-                <i className='fa fa-chevron-left'>Back</i>
+              <div className="back" onClick={toggleMenu}>
+                <i className="fa fa-chevron-left">Back</i>
               </div>
             ) : (
-              <div className='add' onClick={toggleMenu}>
-                <i className='fa fa-plus' />
+              <div className="add" onClick={toggleMenu}>
+                <i className="fa fa-plus" />
               </div>
             )}
           </div>

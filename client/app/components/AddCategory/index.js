@@ -4,67 +4,67 @@
  *
  */
 
-import React from 'react';
+import React from "react";
 
-import { Row, Col } from 'reactstrap';
+import { Row, Col } from "reactstrap";
 
-import Input from '../Input';
-import SelectOption from '../SelectOption';
+import Input from "../Input";
+import SelectOption from "../SelectOption";
 
-const AddCategory = props => {
+const AddCategory = (props) => {
   const {
     categoryFormData,
     categoryChange,
     addCategory,
     products,
     selectedProducts,
-    productSelect
+    productSelect,
   } = props;
 
   return (
-    <div className='add-category'>
+    <div className="add-category">
       <Row>
-        <Col xs='12' md='6'>
+        <Col xs="12" md="6">
           <Input
-            type={'text'}
-            label={'Name'}
-            name={'name'}
-            placeholder={'Category Name'}
+            type={"text"}
+            label={"Name"}
+            name={"name"}
+            placeholder={"Category Name"}
             value={categoryFormData.name}
             onInputChange={(name, value) => {
               categoryChange(name, value);
             }}
           />
         </Col>
-        <Col xs='12' md='12'>
+        <Col xs="12" md="12">
           <Input
-            type={'textarea'}
-            label={'Description'}
-            name={'description'}
-            placeholder={'Category Description'}
+            type={"textarea"}
+            label={"Description"}
+            name={"description"}
+            placeholder={"Category Description"}
             value={categoryFormData.description}
             onInputChange={(name, value) => {
               categoryChange(name, value);
             }}
           />
         </Col>
-        <Col xs='12' md='12'>
+        <Col xs="12" md="12">
           <SelectOption
-            label={'Select Products'}
+            label={"Select Products"}
             multi={true}
             options={products}
             value={selectedProducts}
-            handleSelectChange={value => {
+            handleSelectChange={(value) => {
               productSelect(value);
             }}
           />
         </Col>
       </Row>
       <hr />
-      <div className='add-category-actions'>
+      <div className="add-category-actions">
         <button
-          className='input-btn'
-          type='submit'
+          className="input-btn"
+          type="submit"
           onClick={() => addCategory()}
         >
           Add Category

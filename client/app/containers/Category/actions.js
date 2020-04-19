@@ -4,8 +4,8 @@
  *
  */
 
-import { success } from 'react-notification-system-redux';
-import axios from 'axios';
+import { success } from "react-notification-system-redux";
+import axios from "axios";
 
 import {
   FETCH_CATEGORIES,
@@ -13,13 +13,13 @@ import {
   RESET_CATEGORY,
   TOGGLE_ADD_CATEGORY,
   ADD_CATEGORY,
-  REMOVE_CATEGORY
-} from './constants';
+  REMOVE_CATEGORY,
+} from "./constants";
 
-import { RESET_PRODUCT } from '../Product/constants';
+import { RESET_PRODUCT } from "../Product/constants";
 
-import handleError from '../../utils/error';
-import { unformSelect } from '../../helpers/select';
+import handleError from "../../utils/error";
+import { unformSelect } from "../../helpers/select";
 
 export const categoryChange = (name, value) => {
   let formData = {};
@@ -27,20 +27,20 @@ export const categoryChange = (name, value) => {
 
   return {
     type: CATEGORY_CHANGE,
-    payload: formData
+    payload: formData,
   };
 };
 
 export const toggleAddCategory = () => {
   return {
-    type: TOGGLE_ADD_CATEGORY
+    type: TOGGLE_ADD_CATEGORY,
   };
 };
 
-export const categorySelect = value => {
+export const categorySelect = (value) => {
   return {
     type: CATEGORY_SELECT,
-    payload: value
+    payload: value,
   };
 };
 
@@ -51,7 +51,7 @@ export const fetchCategories = () => {
 
       dispatch({
         type: FETCH_CATEGORIES,
-        payload: response.data.categories
+        payload: response.data.categories,
       });
     } catch (error) {
       const title = `Please try again!`;
@@ -67,15 +67,15 @@ export const deleteCategory = (id, index) => {
 
       const successfulOptions = {
         title: `${response.data.message}`,
-        position: 'tr',
-        autoDismiss: 1
+        position: "tr",
+        autoDismiss: 1,
       };
 
       if (response.data.success == true) {
         dispatch(success(successfulOptions));
         dispatch({
           type: REMOVE_CATEGORY,
-          payload: index
+          payload: index,
         });
       }
     } catch (error) {
@@ -95,22 +95,22 @@ export const addCategory = () => {
 
       let newCategory = {
         products: newProducts,
-        ...category
+        ...category,
       };
 
       const response = await axios.post(`/api/category/add`, newCategory);
 
       const successfulOptions = {
         title: `${response.data.message}`,
-        position: 'tr',
-        autoDismiss: 1
+        position: "tr",
+        autoDismiss: 1,
       };
 
       if (response.data.success == true) {
         dispatch(success(successfulOptions));
         dispatch({
           type: ADD_CATEGORY,
-          payload: response.data.category
+          payload: response.data.category,
         });
         dispatch({ type: RESET_CATEGORY });
         dispatch({ type: RESET_PRODUCT });

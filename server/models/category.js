@@ -1,11 +1,11 @@
-const Mongoose = require('mongoose');
-const slug = require('mongoose-slug-generator');
+const Mongoose = require("mongoose");
+const slug = require("mongoose-slug-generator");
 const { Schema } = Mongoose;
 
 const options = {
-  separator: '-',
-  lang: 'en',
-  truncate: 120
+  separator: "-",
+  lang: "en",
+  truncate: 120,
 };
 
 Mongoose.plugin(slug, options);
@@ -14,32 +14,32 @@ Mongoose.plugin(slug, options);
 const CategorySchema = new Schema({
   _id: {
     type: Schema.ObjectId,
-    auto: true
+    auto: true,
   },
   name: {
     type: String,
-    trim: true
+    trim: true,
   },
-  slug: { type: String, slug: 'name', unique: true },
+  slug: { type: String, slug: "name", unique: true },
   image: {
     data: Buffer,
-    contentType: String
+    contentType: String,
   },
   description: {
     type: String,
-    trim: true
+    trim: true,
   },
   products: [
     {
       type: Schema.Types.ObjectId,
-      ref: 'Product'
-    }
+      ref: "Product",
+    },
   ],
   updated: Date,
   created: {
     type: Date,
-    default: Date.now
-  }
+    default: Date.now,
+  },
 });
 
-module.exports = Mongoose.model('Category', CategorySchema);
+module.exports = Mongoose.model("Category", CategorySchema);

@@ -4,9 +4,9 @@
  *
  */
 
-import React from 'react';
+import React from "react";
 
-const Input = props => {
+const Input = (props) => {
   const {
     type,
     value,
@@ -15,46 +15,46 @@ const Input = props => {
     label,
     name,
     onInputChange,
-    dom
+    dom,
   } = props;
 
   function onChange(e) {
     onInputChange(e.target.name, e.target.value);
   }
 
-  if (type == 'textarea') {
+  if (type == "textarea") {
     return (
-      <div className='textarea-box'>
+      <div className="textarea-box">
         {label && <label>{label}</label>}
         <textarea
-          type={'textarea'}
-          onChange={e => {
+          type={"textarea"}
+          onChange={(e) => {
             onChange(e);
           }}
-          rows='2'
+          rows="2"
           name={name}
           value={value}
           placeholder={placeholder}
-          className={'textarea-text'}
+          className={"textarea-text"}
         />
         {dom}
       </div>
     );
   } else {
     return (
-      <div className='input-box'>
+      <div className="input-box">
         {label && <label>{label}</label>}
         <input
-          autoComplete='off'
+          autoComplete="off"
           type={type}
-          onChange={e => {
+          onChange={(e) => {
             onChange(e);
           }}
           disabled={disabled}
           name={name}
           value={value}
           placeholder={placeholder}
-          className={'input-text'}
+          className={"input-text"}
         />
         {dom}
       </div>

@@ -1,4 +1,4 @@
-const Mongoose = require('mongoose');
+const Mongoose = require("mongoose");
 
 const { Schema } = Mongoose;
 
@@ -6,24 +6,24 @@ const { Schema } = Mongoose;
 const UserSchema = new Schema({
   email: {
     type: String,
-    required: true
+    required: true,
   },
   profile: {
     firstName: { type: String },
     lastName: { type: String },
-    is_subscribed: { type: Boolean }
+    is_subscribed: { type: Boolean },
   },
   password: {
     type: String,
-    required: true
+    required: true,
   },
   role: {
     type: String,
-    enum: ['ROLE_MEMBER', 'ROLE_ADMIN'],
-    default: 'ROLE_MEMBER'
+    enum: ["ROLE_MEMBER", "ROLE_ADMIN"],
+    default: "ROLE_MEMBER",
   },
   resetPasswordToken: { type: String },
-  resetPasswordExpires: { type: Date }
+  resetPasswordExpires: { type: Date },
 });
 
-module.exports = Mongoose.model('User', UserSchema);
+module.exports = Mongoose.model("User", UserSchema);

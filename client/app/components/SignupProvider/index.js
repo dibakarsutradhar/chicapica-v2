@@ -4,14 +4,14 @@
  *
  */
 
-import React from 'react';
+import React from "react";
 
-const SignupProvider = props => {
+const SignupProvider = (props) => {
   return (
-    <div className='signup-provider'>
+    <div className="signup-provider">
       <span>Signup with Google</span>
       <span>Signup with Facebook</span>
-      <div className='coming-soon'>Coming soon</div>
+      <div className="coming-soon">Coming soon</div>
     </div>
   );
 };
