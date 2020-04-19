@@ -74,7 +74,7 @@ class ProductPage extends React.PureComponent {
                   }}
                 />
                 <div className="item-actions">
-                  {itemsInCart.includes(product._id) ? (
+                  {itemsInCart && itemsInCart.includes(product._id) ? (
                     <button
                       disabled={!product.quantity > 0}
                       className="input-btn"
